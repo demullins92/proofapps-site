@@ -6,7 +6,7 @@
   <title>Proof Apps — Crafted for the Craft</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #0f0e0c;
@@ -15,13 +15,13 @@
       display: flex;
       flex-direction: column;
     }
-
+ 
     header {
       text-align: center;
       padding: 60px 24px 40px;
       border-bottom: 1px solid #2a2520;
     }
-
+ 
     .logo {
       font-size: 36px;
       font-weight: 700;
@@ -30,14 +30,14 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-
+ 
     .tagline {
       font-size: 15px;
       color: #7a6f5e;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-
+ 
     main {
       flex: 1;
       max-width: 680px;
@@ -45,9 +45,13 @@
       padding: 60px 24px;
       text-align: center;
     }
-
-    .app-section { margin-bottom: 60px; }
-
+ 
+    .app-block {
+      margin-bottom: 60px;
+    }
+ 
+    .app-section { margin-bottom: 40px; }
+ 
     .app-name {
       font-size: 48px;
       font-weight: 700;
@@ -55,7 +59,7 @@
       color: #f0e6d3;
       margin-bottom: 12px;
     }
-
+ 
     .app-subtitle {
       font-size: 16px;
       color: #e8a923;
@@ -63,14 +67,14 @@
       text-transform: uppercase;
       margin-bottom: 20px;
     }
-
+ 
     .app-description {
       font-size: 16px;
       line-height: 1.7;
       color: #b8aa96;
       margin-bottom: 32px;
     }
-
+ 
     .app-store-btn {
       display: inline-block;
       background: #e8a923;
@@ -81,17 +85,33 @@
       border-radius: 30px;
       text-decoration: none;
       letter-spacing: 0.03em;
+      margin: 4px 8px;
     }
-
+ 
+    .app-store-btn.secondary {
+      background: transparent;
+      color: #e8a923;
+      border: 1px solid #e8a923;
+    }
+ 
+    .coming-soon {
+      display: inline-block;
+      font-size: 13px;
+      color: #4a4035;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+ 
     .divider {
       width: 60px;
       height: 1px;
       background: #2a2520;
-      margin: 0 auto 40px;
+      margin: 0 auto 60px;
     }
-
+ 
     .support-section { margin-bottom: 40px; }
-
+ 
     .support-section h2 {
       font-size: 14px;
       font-weight: 600;
@@ -100,16 +120,16 @@
       text-transform: uppercase;
       margin-bottom: 12px;
     }
-
+ 
     .support-section p {
       font-size: 14px;
       color: #7a6f5e;
       line-height: 1.6;
       margin-bottom: 8px;
     }
-
+ 
     .support-section a { color: #e8a923; text-decoration: none; }
-
+ 
     footer {
       text-align: center;
       padding: 24px;
@@ -117,49 +137,110 @@
       font-size: 12px;
       color: #4a4035;
     }
-
+ 
     footer a { color: #7a6f5e; text-decoration: none; margin: 0 12px; }
   </style>
 </head>
 <body>
-
+ 
   <header>
     <div class="logo">Proof Apps</div>
     <div class="tagline">Crafted for the Craft</div>
   </header>
-
+ 
   <main>
-    <div class="app-section">
-      <div class="app-name">poured</div>
-      <div class="app-subtitle">A Cocktail Codex</div>
-      <p class="app-description">
-        Your AI-powered bar companion. Scan your bottles, discover cocktails you can make right now, and master the craft with step-by-step technique guidance from a world-class bartender — in your pocket.
-      </p>
-      <a href="https://apps.apple.com/app/poured/id6761014298" class="app-store-btn">
-        Download on the App Store
-      </a>
+ 
+    <!-- POURED -->
+    <div class="app-block">
+      <div class="app-section">
+        <div class="app-name">poured</div>
+        <div class="app-subtitle">A Cocktail Codex</div>
+        <p class="app-description">
+          Your AI-powered bar companion. Scan your bottles, discover cocktails you can make right now, and master the craft with step-by-step technique guidance from a world-class bartender — in your pocket.
+        </p>
+        <a href="https://apps.apple.com/app/poured/id6761014298" class="app-store-btn">
+          Download on the App Store
+        </a>
+      </div>
+ 
+      <div class="support-section">
+        <h2>Support</h2>
+        <p>Questions, feedback, or need help with Poured?</p>
+        <p><a href="mailto:support@proofapps.co">support@proofapps.co</a></p>
+      </div>
+ 
+      <div class="support-section">
+        <h2>Legal</h2>
+        <p>
+          <a href="https://demullins92.github.io/proofapps-site/privacy.html">Privacy Policy</a>
+          &nbsp;·&nbsp;
+          <a href="https://demullins92.github.io/proofapps-site/terms.html">Terms of Service</a>
+          &nbsp;·&nbsp;
+          <a href="https://demullins92.github.io/proofapps-site/delete-account.html">Delete Account</a>
+        </p>
+      </div>
     </div>
-
+ 
     <div class="divider"></div>
-
-    <div class="support-section">
-      <h2>Support</h2>
-      <p>Questions, feedback, or need help with Poured?</p>
-      <p><a href="mailto:support@proofapps.co">support@proofapps.co</a></p>
+ 
+    <!-- TIPTRACKR -->
+    <div class="app-block">
+      <div class="app-section">
+        <div class="app-name">tiptrackr</div>
+        <div class="app-subtitle">FoH Tip Tracking</div>
+        <p class="app-description">
+          The only tip tracking app built around how front-of-house actually works. Build a custom tipout template for your venue, log your shifts, and let TipTrackr handle the end-of-night math — automatically.
+        </p>
+        <span class="coming-soon">Coming Soon</span>
+      </div>
+ 
+      <div class="support-section">
+        <h2>Support</h2>
+        <p>Questions, feedback, or need help with TipTrackr?</p>
+        <p><a href="mailto:support@proofapps.co">support@proofapps.co</a></p>
+      </div>
+ 
+      <div class="support-section">
+        <h2>Legal</h2>
+        <p>
+          <a href="https://demullins92.github.io/proofapps-site/tiptrackr-privacy.html">Privacy Policy</a>
+          &nbsp;·&nbsp;
+          <a href="https://demullins92.github.io/proofapps-site/tiptrackr-terms.html">Terms of Service</a>
+        </p>
+      </div>
     </div>
-
-    <div class="support-section">
-      <h2>Legal</h2>
-      <p>
-        <a href="https://demullins92.github.io/proofapps-site/privacy.html">Privacy Policy</a>
-        &nbsp;·&nbsp;
-        <a href="https://demullins92.github.io/proofapps-site/terms.html">Terms of Service</a>
-        &nbsp;·&nbsp;
-        <a href="https://demullins92.github.io/proofapps-site/delete-account.html">Delete Account</a>
-      </p>
+ 
+    <div class="divider"></div>
+ 
+    <!-- BARMATH -->
+    <div class="app-block">
+      <div class="app-section">
+        <div class="app-name">barmath</div>
+        <div class="app-subtitle">Bar Measurements & Conversions</div>
+        <p class="app-description">
+          Fast, accurate bar math for working professionals. Conversions, measurements, and drink calculations — built for the speed of a real service. No fluff, just the numbers you need.
+        </p>
+        <span class="coming-soon">Coming Soon</span>
+      </div>
+ 
+      <div class="support-section">
+        <h2>Support</h2>
+        <p>Questions, feedback, or need help with BarMath?</p>
+        <p><a href="mailto:support@proofapps.co">support@proofapps.co</a></p>
+      </div>
+ 
+      <div class="support-section">
+        <h2>Legal</h2>
+        <p>
+          <a href="https://demullins92.github.io/proofapps-site/barmath-privacy.html">Privacy Policy</a>
+          &nbsp;·&nbsp;
+          <a href="https://demullins92.github.io/proofapps-site/barmath-terms.html">Terms of Service</a>
+        </p>
+      </div>
     </div>
+ 
   </main>
-
+ 
   <footer>
     <p>© 2026 Proof Apps LLC · Georgia, United States</p>
     <p style="margin-top: 8px;">
@@ -168,6 +249,6 @@
       <a href="https://demullins92.github.io/proofapps-site/terms.html">Terms</a>
     </p>
   </footer>
-
+ 
 </body>
 </html>
