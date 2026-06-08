@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "WDUQDM8AB6.com.proofapps.tiptrackr",
+        "paths": [
+          "/tiptrackr/reset-password*"
+        ]
+      }
+    ]
+  }
+}
