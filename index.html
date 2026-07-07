@@ -99,9 +99,12 @@
     display:flex; align-items:center; gap:28px; width:max-content;
     animation:marqueeScroll 26s linear infinite;
   }
-  .marquee-track span{
+  .marquee-track.paused{ animation-play-state:paused; }
+  .marquee-track a{
     font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;
+    transition:color 0.2s ease;
   }
+  .marquee-track a:hover{ color:var(--amber); }
   .marquee-track .dot{ color:var(--amber); font-size:9px; }
   @keyframes marqueeScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
@@ -191,17 +194,8 @@
   <p>Apps built by a certified sommelier with 12 years behind the stick — not a studio guessing at what bartenders need. No ads, ever. No nickel-and-diming.</p>
 </section>
 
-<div class="marquee">
-  <div class="marquee-track">
-    <span>POURED</span><span class="dot">◆</span>
-    <span>BARMATH</span><span class="dot">◆</span>
-    <span>TIPTRACKR</span><span class="dot">◆</span>
-    <span>POURLIGHT</span><span class="dot">◆</span>
-    <span>POURED</span><span class="dot">◆</span>
-    <span>BARMATH</span><span class="dot">◆</span>
-    <span>TIPTRACKR</span><span class="dot">◆</span>
-    <span>POURLIGHT</span><span class="dot">◆</span>
-  </div>
+<div class="marquee" id="marquee">
+  <div class="marquee-track" id="marquee-track"></div>
 </div>
 
 <section id="apps">
@@ -282,6 +276,23 @@
     `;
     grid.appendChild(card);
   });
+
+  // ---- Marquee: clickable app names, built from the same data, pauses on hover/touch so it's an easy target ----
+  const marqueeTrack = document.getElementById('marquee-track');
+  const marqueeItems = [...APPS, ...APPS].map(app =>
+    `<a href="${app.link || '#apps'}">${app.name}</a><span class="dot">◆</span>`
+  ).join('');
+  marqueeTrack.innerHTML = marqueeItems;
+
+  const marqueeEl = document.getElementById('marquee');
+  marqueeEl.addEventListener('mouseenter', () => marqueeTrack.classList.add('paused'));
+  marqueeEl.addEventListener('mouseleave', () => marqueeTrack.classList.remove('paused'));
+  marqueeEl.addEventListener('touchstart', () => marqueeTrack.classList.add('paused'), { passive: true });
+  let marqueeResumeTimer;
+  marqueeEl.addEventListener('touchend', () => {
+    clearTimeout(marqueeResumeTimer);
+    marqueeResumeTimer = setTimeout(() => marqueeTrack.classList.remove('paused'), 2500);
+  }, { passive: true });
 
   // ---- Scroll-linked intro: logo fades & shrinks into the nav as you scroll, and reverses if you scroll back up ----
   const introEl = document.getElementById('intro');
