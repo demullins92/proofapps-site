@@ -94,19 +94,19 @@
     overflow:hidden; padding:22px 0;
     border-top:1px solid rgba(255,255,255,0.08);
     border-bottom:1px solid rgba(255,255,255,0.08);
+    touch-action:pan-y;
   }
   .marquee-track{
     display:flex; align-items:center; gap:28px; width:max-content;
-    animation:marqueeScroll 26s linear infinite;
+    cursor:grab; user-select:none; will-change:transform;
   }
-  .marquee-track.paused{ animation-play-state:paused; }
+  .marquee-track.dragging{ cursor:grabbing; }
   .marquee-track a{
     font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;
-    transition:color 0.2s ease;
+    transition:color 0.2s ease; -webkit-user-drag:none;
   }
   .marquee-track a:hover{ color:var(--amber); }
   .marquee-track .dot{ color:var(--amber); font-size:9px; }
-  @keyframes marqueeScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
   #apps h2, #story h2{ font-family:var(--display); font-size:clamp(30px,4vw,44px); font-weight:700; }
   #apps > p.sub{ color:var(--muted); margin-top:14px; margin-bottom:52px; max-width:520px; font-size:15.5px; }
@@ -277,30 +277,99 @@
     grid.appendChild(card);
   });
 
-  // ---- Marquee: clickable app names, built from the same data, pauses on hover/touch so it's an easy target ----
+  // ---- Marquee: auto-cycles, but draggable/flickable — built from the same app data ----
   const marqueeTrack = document.getElementById('marquee-track');
   const marqueeItems = [...APPS, ...APPS].map(app =>
-    `<a href="${app.link || '#apps'}">${app.name}</a><span class="dot">◆</span>`
+    `<a href="${app.link || '#apps'}" draggable="false">${app.name}</a><span class="dot">◆</span>`
   ).join('');
   marqueeTrack.innerHTML = marqueeItems;
 
   const marqueeEl = document.getElementById('marquee');
-  marqueeEl.addEventListener('mouseenter', () => marqueeTrack.classList.add('paused'));
-  marqueeEl.addEventListener('mouseleave', () => marqueeTrack.classList.remove('paused'));
-  marqueeEl.addEventListener('touchstart', () => marqueeTrack.classList.add('paused'), { passive: true });
-  let marqueeResumeTimer;
-  marqueeEl.addEventListener('touchend', () => {
-    clearTimeout(marqueeResumeTimer);
-    marqueeResumeTimer = setTimeout(() => marqueeTrack.classList.remove('paused'), 2500);
-  }, { passive: true });
+  const AUTO_SPEED = 36; // px/sec base drift
+  let mqPos = 0;
+  let mqVelocity = 0;
+  let mqHalfWidth = 0;
+  let mqDragging = false;
+  let mqHovering = false;
+  let mqLastX = 0;
+  let mqLastT = 0;
+  let mqDragDistance = 0;
+  let mqSuppressClick = false;
 
-  // ---- Scroll-linked intro: logo fades & shrinks into the nav as you scroll, and reverses if you scroll back up ----
+  function measureMarquee() { mqHalfWidth = marqueeTrack.scrollWidth / 2 || 1; }
+  measureMarquee();
+  window.addEventListener('resize', measureMarquee);
+
+  function wrapMarquee(x) {
+    x = x % mqHalfWidth;
+    if (x > 0) x -= mqHalfWidth;
+    return x;
+  }
+
+  let mqLastFrame = performance.now();
+  function mqTick(now) {
+    const dt = Math.min(0.05, (now - mqLastFrame) / 1000);
+    mqLastFrame = now;
+    if (!mqDragging) {
+      if (!mqHovering) mqPos -= AUTO_SPEED * dt;
+      if (Math.abs(mqVelocity) > 0.5) {
+        mqPos += mqVelocity * dt;
+        mqVelocity *= Math.pow(0.93, dt * 60);
+      } else {
+        mqVelocity = 0;
+      }
+    }
+    mqPos = wrapMarquee(mqPos);
+    marqueeTrack.style.transform = `translateX(${mqPos}px)`;
+    requestAnimationFrame(mqTick);
+  }
+  requestAnimationFrame(mqTick);
+
+  marqueeEl.addEventListener('mouseenter', () => { mqHovering = true; });
+  marqueeEl.addEventListener('mouseleave', () => { mqHovering = false; });
+
+  marqueeTrack.addEventListener('pointerdown', (e) => {
+    mqDragging = true;
+    mqDragDistance = 0;
+    mqVelocity = 0;
+    mqLastX = e.clientX;
+    mqLastT = performance.now();
+    marqueeTrack.classList.add('dragging');
+    marqueeTrack.setPointerCapture(e.pointerId);
+  });
+  marqueeTrack.addEventListener('pointermove', (e) => {
+    if (!mqDragging) return;
+    const now = performance.now();
+    const dx = e.clientX - mqLastX;
+    const dtms = Math.max(1, now - mqLastT);
+    mqPos += dx;
+    mqVelocity = dx / (dtms / 1000);
+    mqDragDistance += Math.abs(dx);
+    mqLastX = e.clientX;
+    mqLastT = now;
+  });
+  function mqEndDrag() {
+    if (!mqDragging) return;
+    mqDragging = false;
+    marqueeTrack.classList.remove('dragging');
+    if (mqDragDistance > 6) mqSuppressClick = true;
+  }
+  marqueeTrack.addEventListener('pointerup', mqEndDrag);
+  marqueeTrack.addEventListener('pointercancel', mqEndDrag);
+  marqueeTrack.addEventListener('click', (e) => {
+    if (mqSuppressClick) {
+      e.preventDefault();
+      e.stopPropagation();
+      mqSuppressClick = false;
+    }
+  }, true);
+
+  // ---- Scroll-linked intro: logo fades & shrinks into the nav as you scroll, and reverses any time you scroll back to top ----
   const introEl = document.getElementById('intro');
   const introLogo = document.getElementById('intro-logo');
   const introHint = document.getElementById('intro-hint');
   const introSpacer = document.getElementById('intro-spacer');
   const nav = document.getElementById('nav');
-  const alreadySeen = sessionStorage.getItem('proofIntroPlayed') === '1';
 
   function fadeDistance() {
     return Math.max(1, introSpacer.offsetHeight);
@@ -317,26 +386,13 @@
     introEl.style.pointerEvents = progress >= 1 ? 'none' : 'auto';
     nav.style.opacity = String(progress);
     nav.style.transform = `translateY(${(1 - progress) * -10}px)`;
-
-    if (progress >= 1) {
-      sessionStorage.setItem('proofIntroPlayed', '1');
-    }
   }
 
-  if (alreadySeen) {
-    // Returning visitor this session: skip the intro runway entirely
-    introEl.style.display = 'none';
-    introSpacer.style.display = 'none';
-    nav.classList.add('in');
-    nav.style.opacity = '1';
-    nav.style.transform = 'none';
-  } else {
-    window.addEventListener('scroll', onIntroScroll, { passive: true });
-    introEl.addEventListener('click', () => {
-      window.scrollTo({ top: fadeDistance() + 2, behavior: 'smooth' });
-    });
-    onIntroScroll();
-  }
+  window.addEventListener('scroll', onIntroScroll, { passive: true });
+  introEl.addEventListener('click', () => {
+    window.scrollTo({ top: fadeDistance() + 2, behavior: 'smooth' });
+  });
+  onIntroScroll();
 
   // Clicking the nav wordmark scrolls all the way to the top (re-revealing the logo intro if still in range)
   document.getElementById('nav-home').addEventListener('click', (e) => {
