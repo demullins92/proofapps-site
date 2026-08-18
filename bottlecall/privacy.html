@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — BottleCall</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #F5F1EA;
+      background: #0C0B0D;
+      padding: 40px 20px;
+    }
+    .container { max-width: 740px; margin: 0 auto; }
+    .brand { font-size: 28px; font-weight: 700; color: #E3944B; margin-bottom: 4px; }
+    .brand-sub { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9C93A6; margin-bottom: 48px; }
+    h1 { font-size: 32px; font-weight: 700; color: #F5F1EA; margin-bottom: 8px; }
+    .effective-date { font-size: 13px; color: #9C93A6; margin-bottom: 40px; }
+    h2 { font-size: 20px; font-weight: 600; color: #E3944B; margin-top: 40px; margin-bottom: 12px; }
+    p { margin-bottom: 16px; color: #d8d2c8; }
+    ul { margin: 0 0 16px 24px; color: #d8d2c8; }
+    ul li { margin-bottom: 6px; }
+    .divider { border: none; border-top: 1px solid #2a2620; margin: 40px 0; }
+    a { color: #E3944B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .contact-box { background: #17141A; border: 1px solid #2a2620; border-radius: 8px; padding: 24px; margin-top: 40px; }
+    .contact-box p { margin-bottom: 6px; }
+    .note-box { background: #17141A; border-left: 3px solid #E3944B; border-radius: 4px; padding: 20px 24px; margin: 24px 0; }
+    .note-box p { margin-bottom: 0; font-size: 14px; color: #b8afa0; }
+    .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #2a2620; font-size: 13px; color: #9C93A6; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="brand">BottleCall</div>
+    <div class="brand-sub">A Proof App</div>
+
+    <h1>Privacy Policy</h1>
+    <p class="effective-date">Effective Date: [INSERT LAUNCH DATE] · Last Updated: [INSERT LAUNCH DATE]</p>
+
+    <p>Proof Apps LLC ("we," "our," or "us") operates the BottleCall mobile application and web dashboard (together, the "Service"). BottleCall helps bars and restaurants take voice- and camera-based liquor inventory counts. This Privacy Policy explains how we collect, use, and protect information when your business uses BottleCall.</p>
+
+    <p>By using BottleCall, you agree to the practices described in this Privacy Policy. If you do not agree, please do not use the Service.</p>
+
+    <div class="note-box">
+      <p><strong>Who this applies to:</strong> BottleCall is used in two ways — by <strong>managers</strong>, who create a real account to set up their location, catalog, staff, and view reports on the web dashboard; and by <strong>staff members</strong>, who use a shared location access code plus a personal PIN on the mobile app to run inventory counts, with no personal account or sign-up required.</p>
+    </div>
+
+    <hr class="divider">
+
+    <h2>1. Information We Collect</h2>
+
+    <p><strong>Manager Account Information</strong><br>
+    When a manager creates a BottleCall account, we collect an email address and password, stored securely via Supabase Authentication.</p>
+
+    <p><strong>Location and Organization Data</strong><br>
+    We store information about your business location(s), including location name, a shared access code used to unlock the mobile app for staff, and your bottle catalog (product names and categories you've added).</p>
+
+    <p><strong>Staff Information</strong><br>
+    Managers may add staff members by name so that inventory counts can be attributed to a specific person. Staff members are assigned a numeric PIN, which is <strong>hashed before storage using industry-standard encryption</strong> — we do not store PINs in plain text, and PINs cannot be retrieved or viewed by anyone, including us. If a staff member needs a new PIN, a manager can generate a new one; the old one is permanently replaced.</p>
+
+    <p><strong>Inventory Session Data</strong><br>
+    We store the results of inventory counts your staff perform — bottle names, quantities counted, the date and time of the count, and which staff member performed it — so managers can review historical counts and export reports.</p>
+
+    <p><strong>Camera and Photos</strong><br>
+    BottleCall's scan-to-count feature requests access to your device's camera solely to photograph bottle labels for identification. Photos are processed in real time through our servers and Anthropic's Claude API, and are <strong>not stored</strong> by Proof Apps after identification is complete.</p>
+
+    <p><strong>Microphone and Voice Audio</strong><br>
+    BottleCall's voice-count feature requests access to your device's microphone to transcribe spoken bottle names and quantities in real time using Deepgram's speech-to-text service. Audio is streamed for live transcription and is <strong>not stored</strong> as recordings by Proof Apps.</p>
+
+    <hr class="divider">
+
+    <h2>2. How We Use Your Information</h2>
+
+    <ul>
+      <li>To provide the voice- and scan-based counting features of the App</li>
+      <li>To identify bottles from photographs using AI</li>
+      <li>To transcribe spoken inventory counts using AI</li>
+      <li>To store and organize your location's bottle catalog, staff, and count history</li>
+      <li>To generate exportable inventory reports for managers</li>
+      <li>To authenticate managers and secure the web dashboard</li>
+      <li>To improve the Service and fix issues</li>
+    </ul>
+
+    <p>We do not use your data for advertising purposes. BottleCall contains no third-party advertising.</p>
+
+    <hr class="divider">
+
+    <h2>3. How We Share Your Information</h2>
+
+    <p>We do not sell your personal information to third parties under any circumstances. We share data only with the following service providers who help us operate the Service:</p>
+
+    <p><strong>Anthropic API</strong><br>
+    Bottle photographs are transmitted through our backend to Anthropic's Claude API to power AI bottle identification. This data is processed in accordance with Anthropic's privacy policy at <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a> and is not used to train Anthropic's models without explicit consent.</p>
+
+    <p><strong>Deepgram</strong><br>
+    Voice audio is streamed to Deepgram for real-time transcription during voice counts. Deepgram's privacy policy is available at <a href="https://deepgram.com/privacy-policy" target="_blank">deepgram.com/privacy-policy</a>.</p>
+
+    <p><strong>Supabase</strong><br>
+    Manager accounts, location data, staff records (with hashed PINs), and inventory session data are stored securely using Supabase, which provides database hosting and authentication infrastructure. Supabase's privacy policy is available at <a href="https://supabase.com/privacy" target="_blank">supabase.com/privacy</a>.</p>
+
+    <p><strong>Legal Requirements</strong><br>
+    We may disclose your information if required to do so by law, court order, or in response to a valid legal request from a governmental authority.</p>
+
+    <hr class="divider">
+
+    <h2>4. Data Storage, Security, and International Transfers</h2>
+
+    <p>Account, location, staff, and inventory data are stored securely using Supabase with industry-standard encryption in transit and at rest. Staff PINs are never stored in plain text — they are hashed using bcrypt, a one-way cryptographic function, meaning even Proof Apps cannot view or recover an existing PIN.</p>
+
+    <p>Bottle photographs and voice audio are never stored on our servers after processing.</p>
+
+    <p><strong>International Data Transfers</strong><br>
+    Your data is stored on servers located in the United States. If you are accessing BottleCall from outside the United States, please be aware that your information may be transferred to, stored, and processed in the United States, where data protection laws may differ from those in your country. By using the Service, you consent to this transfer.</p>
+
+    <hr class="divider">
+
+    <h2>5. Data Retention</h2>
+
+    <p>We retain manager account data and location data for as long as the account is active. Inventory session history is retained to support historical reporting unless a manager requests its deletion. If you delete your account, your personal data is permanently deleted from our systems within 30 days of your request.</p>
+
+    <hr class="divider">
+
+    <h2>6. Children's Privacy (COPPA)</h2>
+
+    <p>BottleCall is a business tool intended for use by adult staff of bars and restaurants. It is not directed at children under the age of 13, and we do not knowingly collect personal information from children under 13.</p>
+
+    <p>If you believe a child under 13 has provided us with personal information, please contact us immediately at <a href="mailto:support@proofapps.co">support@proofapps.co</a> and we will delete that information promptly.</p>
+
+    <hr class="divider">
+
+    <h2>7. Your Rights and Choices</h2>
+
+    <p>Managers have the right to:</p>
+    <ul>
+      <li>Access the personal information we hold about their account and location</li>
+      <li>Correct inaccurate information</li>
+      <li>Request deletion of their account and all associated data</li>
+      <li>Remove staff members and their attributed count history at any time via the dashboard</li>
+    </ul>
+
+    <p>To exercise any of these rights, contact us at <a href="mailto:support@proofapps.co">support@proofapps.co</a>. We will respond within 30 days of receiving your request.</p>
+
+    <p><strong>Deleting Your Account</strong><br>
+    BottleCall does not currently offer in-app self-service account deletion. To request deletion of your manager account and associated location data, email <a href="mailto:support@proofapps.co">support@proofapps.co</a> with the subject line "Delete My Account" and the email address associated with your account. All personal data will be permanently deleted within 30 days of your request.</p>
+
+    <hr class="divider">
+
+    <h2>8. California Privacy Rights (CCPA)</h2>
+
+    <p>If you are a California resident, you have the following rights under the California Consumer Privacy Act:</p>
+    <ul>
+      <li>The right to know what personal information we collect, use, and share</li>
+      <li>The right to delete your personal information</li>
+      <li>The right to opt out of the sale of personal information</li>
+      <li>The right to non-discrimination for exercising your privacy rights</li>
+    </ul>
+
+    <p>We do not sell personal information. To exercise your rights, contact us at <a href="mailto:support@proofapps.co">support@proofapps.co</a> with the subject line "California Privacy Request."</p>
+
+    <hr class="divider">
+
+    <h2>9. Changes to This Policy</h2>
+
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make material changes, we will update the "Last Updated" date at the top of this page. Continued use of BottleCall after changes become effective constitutes acceptance of the updated policy.</p>
+
+    <hr class="divider">
+
+    <h2>10. Contact Us</h2>
+
+    <div class="contact-box">
+      <p><strong>Proof Apps LLC</strong></p>
+      <p>Email: <a href="mailto:support@proofapps.co">support@proofapps.co</a></p>
+      <p>Website: <a href="https://proofapps.co" target="_blank">proofapps.co</a></p>
+      <p style="margin-top: 12px; font-size: 14px; color: #9C93A6;">
+        For privacy-related requests, please use the subject line "Privacy Request" so we can route your inquiry appropriately. We are committed to responding within 30 days.
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>© 2026 Proof Apps LLC. All rights reserved.</p>
+      <p style="margin-top: 4px;">BottleCall is a Proof App — roll call your bar.</p>
+    </div>
+
+  </div>
+</body>
+</html>
