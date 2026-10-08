@@ -1,0 +1,17 @@
+name: Test Expo Push Delivery
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-test-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send exact captured payload to Expo
+        env:
+          EXPO_ACCESS_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}
+        run: |
+          curl -X POST https://exp.host/--/api/v2/push/send \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $EXPO_ACCESS_TOKEN" \
+            -d '[{"to":"ExponentPushToken[_Z8Z2YMM6Bv82nZKY0TDV2]","sound":"default","title":"Low stock","body":"1 bottle needs reordering: Tito'"'"'s (1L)","priority":"high","data":{"location_id":"e0883158-fedd-424a-a91e-1711547bed06","bottle_names":["Tito'"'"'s (1L)"]}}]'
